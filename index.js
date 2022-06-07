@@ -1,3 +1,10 @@
+//
+
+// a is lower bound, b is upper bound, and x is to be tested
+function inRange(a, b, x) {
+	return x >= a && x <= b;
+}
+
 class Cube {
 	cx = 0;
 	cy = 0;
@@ -45,9 +52,12 @@ class Cube {
 
 		// GOOD
 		return (
-			x >= left && x <= right &&
-			y >= top && y <= bottom &&
-			z >= back && z <= front
+			inRange(left, right, x) &&
+			inRange(top, bottom, y) &&
+			inRange(back, front, z)
+			// (x >= left && x <= right) &&
+			// (y >= top && y <= bottom) &&
+			// (z >= back && z <= front)
 		);
 	}
 
@@ -62,7 +72,12 @@ class Cube {
 		} = this.getBounds();
 
 		return (
-			x
+			!inRange(left, right, x) ||
+			!inRange(top, bottom, y) ||
+			!inRange(back, front, z)
+			// x < left || x > right ||
+			// y < top || y > bottom ||
+			// z < back || z > front
 		);
 	}
 }
@@ -78,11 +93,21 @@ const points = [
 	[-6, -3, -1]
 ];
 
+// const point
+// const point = [-1, 1, 1];
+// log point
+// console.log(point);
+// test if inside cube
+// console.log(cube.isInside(point));
+// log that result
 
+// points.forEach(point => {
+// 	console.log(cube.isInside(point));
+// });
 
+// const results = points.map((point) => cube.isInside(point));
+// for (const result of results)
+// 	console.log(`[x, y, z] => ${result}`);
 
-
-
-const list = [1, 2, 3];
-
-const newList = list.map(num => num * 2);
+for (const point of points)
+	console.log(`${point} => ${cube.isInside(point)}`);

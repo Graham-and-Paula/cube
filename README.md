@@ -1,0 +1,2 @@
+# cube
+more logic practice
